@@ -1,0 +1,63 @@
+﻿<Window x:Class="DinhLam_C3_Bai2.Views.Schedule.ScheduleWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DinhLam_C3_Bai2.Views.Schedule"
+        mc:Ignorable="d"
+        Title="ScheduleWindow" Height="550" Width="800">
+    <Grid>
+        <Label 
+            Height="50"
+            VerticalAlignment="Top"
+            Content="SCHEDULE"
+            FontSize="30" FontWeight="Black"
+            HorizontalAlignment="Center"/>
+        <StackPanel 
+              x:Name="buttonPanel"
+              Orientation="Horizontal"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Top"
+              Margin="10,60,10,0"
+              Height="50"
+          >
+            <Button x:Name="btNewSchedule"
+                   Content="New Schedule"
+                   Width="150"
+                   Margin="5"
+                   FontSize="18"
+                   FontWeight="Bold"
+                   HorizontalContentAlignment="Center"
+                   VerticalContentAlignment="Center"
+                   Click="NewSchedule_Click"
+               />
+            <Button x:Name="btChangeStatus"
+                  Content="Change Status"
+                  Width="150"
+                  Margin="5"
+                  FontSize="18"
+                  FontWeight="Bold"
+                  HorizontalContentAlignment="Center"
+                  VerticalContentAlignment="Center"
+                  Click="ChangeStatus_Click"
+              />
+            <Button 
+                  Content="Back"
+                  Width="100"
+                  Margin="5"
+                  FontSize="18"
+                  FontWeight="Bold"
+                  HorizontalContentAlignment="Center"
+                  VerticalContentAlignment="Center"
+                  Click="Back_Click"
+              />
+        </StackPanel>
+        <StackPanel 
+             x:Name="mainPanel"
+             VerticalAlignment="Top"
+             Margin="10,120,10,10"
+         >
+
+        </StackPanel>
+    </Grid>
+</Window>

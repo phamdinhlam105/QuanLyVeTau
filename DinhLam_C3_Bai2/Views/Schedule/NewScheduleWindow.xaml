@@ -1,0 +1,23 @@
+﻿<Window x:Class="DinhLam_C3_Bai2.Views.Schedule.NewScheduleWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DinhLam_C3_Bai2.Views.Schedule"
+        mc:Ignorable="d"
+        Title="NewScheduleWindow" Height="550" Width="800">
+    <Grid>
+        <Label 
+            Height="50"
+            VerticalAlignment="Top"
+            Content="NEW SCHEDULE"
+            FontSize="30" FontWeight="Black"
+            HorizontalAlignment="Center"/>
+        <StackPanel 
+              x:Name="mainPanel"
+              VerticalAlignment="Top"
+              Margin="10,80,10,10">
+
+        </StackPanel>
+    </Grid>
+</Window>
