@@ -16,7 +16,7 @@ namespace DinhLam_C3_Bai2
     {
         private ScheduleWindow _scheduleWindow;
         private StackPanel _stackPanel;
-        private ScheduleService _scheduleService;
+        private IScheduleService _scheduleService;
         private ObservableCollection<ScheduleDto> _schedules;
         private int ChosenId = 0;
         public ObservableCollection<ScheduleDto> Schedules
@@ -51,7 +51,7 @@ namespace DinhLam_C3_Bai2
         public void ImportView()
         {
             _stackPanel.Children.Clear();
-            Schedules = new ObservableCollection<ScheduleDto>(_scheduleService.GetAll());
+            Schedules = new ObservableCollection<ScheduleDto>(_scheduleService.GetAllDto());
             DataGrid scheduleGrid = UIHelpers.CreateDataGrid<ScheduleDto>(Schedules, SelectionChanged);
             DataGridTextColumn IdColumn = UIHelpers.CreateDatagridColumn("Id", "Id");
             DataGridTextColumn FromColumn = UIHelpers.CreateDatagridColumn("From", "From");

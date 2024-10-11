@@ -15,14 +15,16 @@ namespace DinhLam_C3_Bai2
     public class NewTicketViewModel:INotifyPropertyChanged
     {
         StackPanel _stackPanel;
-        private TicketService _ticketService;
-        private TicketBuilder _newticket;
-        private StationService _stationService;
+        private ITicketService _ticketService;
+        private ITicketBuilder _newticket;
+        private IStationService _stationService;
+        private IScheduleService _scheduleService;
+        private IDestinationService _destinationService;
+        private IUpdateScheduleService _updateScheduleService;
         private ObservableCollection<Station> _startStation;
         private ObservableCollection<Station> _destinationStation;
         private ObservableCollection<Seat> _seats;
         private ObservableCollection<Coach> _coaches;
-        private ScheduleService _scheduleService;
         private NewTicketWindow _newTicketWindow;
         public ObservableCollection<Station> StartStation
         {
@@ -74,6 +76,8 @@ namespace DinhLam_C3_Bai2
             _newticket = new TicketBuilder();
             _stationService = new StationService();
             _scheduleService = new ScheduleService();
+            _destinationService = new DestinationService();
+            _updateScheduleService = new UpdateScheduleService();
             _newTicketWindow = newTicketWindow;
         }
         private void CustomerInfoFinish_Click(object sender, RoutedEventArgs e)
@@ -139,7 +143,7 @@ namespace DinhLam_C3_Bai2
             if (sender is ComboBox comboBox && comboBox.SelectedItem is Station selectedStation)
             {
                 DestinationStation.Clear();
-                foreach (var item in new ObservableCollection<Station>(_stationService.ListDestinations(selectedStation)))
+                foreach (var item in new ObservableCollection<Station>(_destinationService.GetDestination(selectedStation)))
                     DestinationStation.Add(item);
             }
         }
@@ -159,7 +163,7 @@ namespace DinhLam_C3_Bai2
                                 if (combo.Name == "destinationStation")
                                     destinationStation = UIHelpers.GetItemFromComboBox<Station>(combo);
                             }
-            List<Schedule> schedules = _scheduleService.GetSchedule(startStation, destinationStation);
+            List<Schedule> schedules = _scheduleService.GetScheduleByStation(startStation, destinationStation).ToList();
             if (schedules.Count() == 0)
                 MessageBox.Show(Constants.NoTrain);
             else
@@ -284,7 +288,7 @@ namespace DinhLam_C3_Bai2
                         .SetPosition(CoachNo, SeatNo)
                         .Build();
                     _ticketService.Add(newticket);
-                    _scheduleService.UpdateSchedule(newticket);
+                    _updateScheduleService.UpdateScheduleStatus(newticket);
                     MessageBox.Show(Constants.CompleteCreation);
                     TicketDetailWindow win2 = new TicketDetailWindow(newticket.Id);
                     win2.ShowDialog();

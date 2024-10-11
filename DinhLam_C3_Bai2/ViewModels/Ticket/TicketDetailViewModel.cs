@@ -13,7 +13,7 @@ namespace DinhLam_C3_Bai2
     {
         private StackPanel _stackPanel;
         private int _chosenId;
-        private TicketService _ticketService;
+        private ITicketService _ticketService;
         private TicketDetailWindow _ticketDetailWindow;
         public TicketDetailViewModel(StackPanel stackPanel, int ChosenId,TicketDetailWindow ticketDetailWindow) 
         {

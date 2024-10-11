@@ -61,7 +61,7 @@ namespace DinhLam_C3_Bai2.Views.Schedule {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/DinhLam_C3_Bai2;V1.0.0.0;component/views/schedule/newschedulewindow.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/DinhLam_C3_Bai2;component/views/schedule/newschedulewindow.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\Views\Schedule\NewScheduleWindow.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

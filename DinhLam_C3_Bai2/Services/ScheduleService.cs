@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace DinhLam_C3_Bai2
 {
-    public class ScheduleService
+    public class ScheduleService:IScheduleService
     {
         private readonly List<Schedule> _schedule = AllDataContext.AllSchedules;
-        private TrainService _trainService = new TrainService();
-        public List<Schedule> GetSchedule(Station start, Station destination)
+        public IEnumerable<Schedule> GetScheduleByStation(Station start, Station destination)
         {
             List<Schedule> chosenSchedule = new List<Schedule>();
             foreach(var schedule in _schedule)
@@ -21,7 +20,7 @@ namespace DinhLam_C3_Bai2
             return chosenSchedule;
         }
 
-        public List<Schedule> GetAllData() 
+        public IEnumerable<Schedule> GetAll() 
         {
             return _schedule;
         }
@@ -48,7 +47,7 @@ namespace DinhLam_C3_Bai2
             };
         }
 
-        public List<ScheduleDto> GetAll()
+        public IEnumerable<ScheduleDto> GetAllDto()
         {
             List<ScheduleDto> listdto = new List<ScheduleDto>();
             foreach (var schedule in _schedule)
@@ -63,14 +62,7 @@ namespace DinhLam_C3_Bai2
             _schedule.Add(schedule);
         }
 
-        public List<Train> GetAvailableTrain(DateTime departure, DateTime arrived)
-        {
-            List<Train> trainlist = new List<Train>();
-            foreach (var item in _schedule)
-                if (arrived < item.DepartureTime || departure > item.ArrivedTime)
-                    trainlist.Add(_trainService.NewTrain(item.TrainType.Id));
-            return trainlist;
-        }
+        
 
         public void ChangeStatus(int Id)
         {
@@ -83,21 +75,6 @@ namespace DinhLam_C3_Bai2
                         item.Status = 1;
                     break;
                 }
-        }
-
-        public void UpdateSchedule(TrainTicket newTicket)
-        {
-            foreach(var item in  _schedule)
-            {
-                if (item.Id == newTicket.TrainInfo.Id)
-                {
-                    _trainService.BookingPosition(item.TrainType,newTicket.CoachNo, newTicket.SeatNo);
-                    _trainService.CheckStatus(item.TrainType);
-                    if (item.TrainType.Status == 0)
-                        item.Status = 0;
-                    break;
-                }
-            }
         }
     }
 }

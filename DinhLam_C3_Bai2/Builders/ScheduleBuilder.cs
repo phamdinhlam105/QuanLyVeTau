@@ -1,13 +1,15 @@
-﻿using System;
+﻿
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace DinhLam_C3_Bai2
 {
-    public class ScheduleBuilder:IBuilder<Schedule>
+    public class ScheduleBuilder:IScheduleBuilder
     {
         private Schedule _schedule;
         private static int _count = 1;
@@ -15,31 +17,34 @@ namespace DinhLam_C3_Bai2
         {
             _schedule = new Schedule();
         }
-
-        public ScheduleBuilder SetId()
+        public void Clear()
+        {
+            _schedule = new Schedule();
+        }
+        public IScheduleBuilder SetId()
         {
             _schedule.Id= _count;
             return this;
         }
-        public ScheduleBuilder SetStation(Station start,Station destination)
+        public IScheduleBuilder SetStation(Station start,Station destination)
         {
             _schedule.Start= start.Clone();
             _schedule.Destination = destination.Clone();
             return this;
         }
 
-        public ScheduleBuilder SetTime(DateTime departure, DateTime arrived)
+        public IScheduleBuilder SetTime(DateTime departure, DateTime arrived)
         {
             _schedule.DepartureTime = departure;
             _schedule.ArrivedTime = arrived;
             return this;
         }
-        public ScheduleBuilder SetTrain(Train train)
+        public IScheduleBuilder SetTrain(Train train)
         {
             _schedule.TrainType = train.Clone();
             return this;
         }
-        public ScheduleBuilder SetStatus(int status)
+        public IScheduleBuilder SetStatus(int status)
         {
             _schedule.Status = status;
             return this;

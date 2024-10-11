@@ -14,7 +14,7 @@ namespace DinhLam_C3_Bai2
         StackPanel _stackPanel;
         private List<TicketDto> _ticketList;
         
-        private TicketService _ticketService;
+        private ITicketService _ticketService;
         public TicketViewModel(StackPanel stackPanel)
         {
             _stackPanel = stackPanel;
@@ -24,7 +24,7 @@ namespace DinhLam_C3_Bai2
         public void ImportView()
         {
             _stackPanel.Children.Clear();
-            _ticketList = _ticketService.GetAll();
+            _ticketList = _ticketService.GetAllDto().ToList();
             DataGrid dataGrid = new DataGrid
             {
                 AutoGenerateColumns = false,

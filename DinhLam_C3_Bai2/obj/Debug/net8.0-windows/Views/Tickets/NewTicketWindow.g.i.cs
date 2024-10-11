@@ -61,7 +61,7 @@ namespace DinhLam_C3_Bai2.Views.Tickets {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/DinhLam_C3_Bai2;V1.0.0.0;component/views/tickets/newticketwindow.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/DinhLam_C3_Bai2;component/views/tickets/newticketwindow.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\Views\Tickets\NewTicketWindow.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

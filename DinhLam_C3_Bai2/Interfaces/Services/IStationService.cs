@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace DinhLam_C3_Bai2
 {
-    public interface IBuilder<T>
+    public interface IStationService
     {
-        T Build();
+        IEnumerable<Station> GetAllStation();
     }
 }

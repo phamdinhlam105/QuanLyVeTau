@@ -1,4 +1,5 @@
-﻿using DinhLam_C3_Bai2.Views.Schedule;
+﻿
+using DinhLam_C3_Bai2.Views.Schedule;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,14 +16,17 @@ namespace DinhLam_C3_Bai2.ViewModels
     {
         private NewScheduleWindow _newSchduleWindow;
         private StackPanel _stackPanel;
-        private ScheduleService _scheduleService;
+        private IScheduleService _scheduleService;
         private ObservableCollection<Station> _startStation;
         private ObservableCollection<Station> _destinationStation;
         private ObservableCollection<Train> _trains;
         private DateTime departure;
         private DateTime arrived;
-        private ScheduleBuilder _newSchedule;
-        private StationService _stationService;
+        private IScheduleBuilder _newSchedule;
+        private IStationService _stationService;
+        private IUpdateScheduleService _updateScheduleService;
+        private IDestinationService _destinationService;
+        private ITrainAvailableService _trainAvailableService;
         public ObservableCollection<Station> StartStation
         {
             get => _startStation;
@@ -64,13 +68,16 @@ namespace DinhLam_C3_Bai2.ViewModels
             _newSchedule = new ScheduleBuilder();
             _stationService = new StationService();
             _newSchduleWindow = newScheduleWindow;
+            _destinationService = new DestinationService();
+            _updateScheduleService = new UpdateScheduleService();
+            _trainAvailableService = new TrainAvailableService();
         }
         private void Start_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (sender is ComboBox comboBox && comboBox.SelectedItem is Station selectedStation)
             {
                 DestinationStation.Clear();
-                foreach (var item in new ObservableCollection<Station>(_stationService.ListDestinations(selectedStation)))
+                foreach (var item in new ObservableCollection<Station>(_destinationService.GetDestination(selectedStation)))
                     DestinationStation.Add(item);
             }
         }
@@ -142,8 +149,7 @@ namespace DinhLam_C3_Bai2.ViewModels
             arrived = UIHelpers.GetDateTimeFromPicker((StackPanel)_stackPanel.Children[3]);
             if (Validate.DateTimeValidate(departure, arrived))
             {
-                Trains = new ObservableCollection<Train>(_scheduleService.GetAvailableTrain(departure, arrived));
-                
+                Trains = new ObservableCollection<Train>(_trainAvailableService.GetAvailableTrain(departure, arrived));
                 if (Trains.Count() != 0)
                 {
                     ComboBox trainlist = UIHelpers.CreateComboBox<Train>("train", Trains, "Name", null);

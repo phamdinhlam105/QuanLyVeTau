@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace DinhLam_C3_Bai2
 {
-    public class TicketService
+    public class TicketService:ITicketService
     {
         private readonly List<TrainTicket> _ticketList = AllDataContext.AllTickets;
 
-        public List<TrainTicket> GetAllData()
+        public IEnumerable<TrainTicket> GetAll()
         {
             return _ticketList;
         }
@@ -43,7 +43,7 @@ namespace DinhLam_C3_Bai2
         }
 
 
-        public List<TicketDto> GetAll()
+        public IEnumerable<TicketDto> GetAllDto()
         {
             List<TicketDto> listdto = new List<TicketDto>();
             foreach (TrainTicket ticket in _ticketList)

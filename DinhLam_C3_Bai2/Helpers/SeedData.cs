@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -63,7 +64,7 @@ namespace DinhLam_C3_Bai2
             AllDataContext.AllTrains.Add(train3);
 
             //schedule
-            ScheduleBuilder scheduleBuilder = new ScheduleBuilder();
+            IScheduleBuilder scheduleBuilder = new ScheduleBuilder();
             Schedule schedule1 = scheduleBuilder
                 .SetId()
                 .SetStation(station2, station1)
@@ -90,7 +91,7 @@ namespace DinhLam_C3_Bai2
             AllDataContext.AllSchedules.Add(schedule3);
 
             //ticket
-            TicketBuilder ticketBuilder = new TicketBuilder();
+            ITicketBuilder ticketBuilder = new TicketBuilder();
             TrainTicket ticket1 = ticketBuilder
                 .SetId()
                 .SetCustomer(123456, "Nguyen Van A", 9874213)
@@ -125,11 +126,11 @@ namespace DinhLam_C3_Bai2
             AllDataContext.AllTickets.Add(ticket3);
             AllDataContext.AllTickets.Add(ticket4);
 
-            ScheduleService scheduleService = new ScheduleService();
-            scheduleService.UpdateSchedule(ticket1);
-            scheduleService.UpdateSchedule(ticket2);
-            scheduleService.UpdateSchedule(ticket3);
-            scheduleService.UpdateSchedule(ticket4);
+            IUpdateScheduleService updateScheduleService = new UpdateScheduleService();
+            updateScheduleService.UpdateScheduleStatus(ticket1);
+            updateScheduleService.UpdateScheduleStatus(ticket2);
+            updateScheduleService.UpdateScheduleStatus(ticket3);
+            updateScheduleService.UpdateScheduleStatus(ticket4);
         }
     }
 }
